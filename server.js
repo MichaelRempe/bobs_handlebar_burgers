@@ -1,7 +1,7 @@
 //*******DEPENDENCIES*********************************************************************************//
 const express = require("express"); //Express Node Package to create back-end server/routes/control-flow
 const exphbs = require("express-handlebars");// Handle Bars - Templating Engine deliver/format data to front end
-const db = require("../handlebars_burgers/app/models");// SQL - Database connection to query in-house data
+const db = require("./app/models");// SQL - Database connection to query in-house data
 
 //*******APP-CONFIG***********************************************************************************//
 let app = express();//Instance of Express server
@@ -13,16 +13,16 @@ app.use(express.json());
 app.engine("handlebars", exphbs({ defaultLayout: "main" })); 
 app.set("view engine", "handlebars");
 //Incorporate static directory
-app.use(express.static("./public"));
+app.use(express.static("./app/public"));
 
 //**********SYNC-DB***********************************************************************************//
 //wrap app listeners w/ db sync to ensure db is ready
 db.sequelize.sync({force:true}).then(()=>{
     app.listen(PORT, ()=>{
-        console.log("App established on port:", port);
+        console.log("App established on port:", PORT);
     });
 });
 
 //**********ROUTES************************************************************************************//
 //Links out to route handler
-require("./routes")(app);
+require("./app/routes/html-routes")(app);
