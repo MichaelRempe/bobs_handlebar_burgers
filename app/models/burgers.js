@@ -1,9 +1,23 @@
 // Create Burgers table for DB
-module.exports = (sequelize, Datatypes)=>{
+module.exports = (sequelize, Datatypes) => {
     let Burger = sequelize.define("Burger",
-    {
-        name:Datatypes.STRING,
-        devoured:Datatypes.BOOLEAN
-    });
+        {
+            id: {
+                type: Datatypes.INTEGER,
+                allowNull: false,
+                primaryKey: true,
+                autoIncrement: true
+            },
+            name: {
+                type: Datatypes.STRING,
+                allowNull: false,
+            },
+            devoured: {
+                type: Datatypes.BOOLEAN,
+                allowNull: false,
+                //sequelizeDefault: false 
+            }
+
+        },{timestamps:false});
     return Burger;
 }
