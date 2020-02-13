@@ -15,6 +15,10 @@ app.set("view engine", "handlebars");
 //Incorporate static directory
 app.use(express.static("./app/public"));
 
+//**********ROUTES************************************************************************************//
+//Links out to route handler
+require("./app/routes/html-routes")(app);
+require("./app/routes/api-routes")(app);
 //**********SYNC-DB***********************************************************************************//
 //wrap app listeners w/ db sync to ensure db is ready
 db.sequelize.sync({force:true}).then(()=>{
@@ -22,7 +26,3 @@ db.sequelize.sync({force:true}).then(()=>{
         console.log("App established on port:", PORT);
     });
 });
-
-//**********ROUTES************************************************************************************//
-//Links out to route handler
-require("./app/routes/html-routes")(app);
