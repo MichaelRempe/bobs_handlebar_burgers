@@ -15,6 +15,7 @@ module.exports = (sequelize, Datatypes) => {
             devoured: {
                 type: Datatypes.BOOLEAN,
                 allowNull: false,
+                defaultValue: false
                 //sequelizeDefault: false 
             }
 

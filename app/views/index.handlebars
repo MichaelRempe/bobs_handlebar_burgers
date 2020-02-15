@@ -1,1 +1,17 @@
-<h1>{{message}}</h1>
+{{#each orders}}
+<h1>{{this.name}}</h1>
+{{/each}}
+{{!-- <div class="col-6 text-center">
+    <h2>Order List:</h2>
+    <ul>
+        {{#each orders}}
+        <li>{{this.name}}</li>
+        {{/each}}
+    </ul>
+</div>
+<div class="col-6 text-center">
+    <h2>Devoured Burgers:</h2>
+    {{#each devoured}}
+        <li>{{this.name}}</li>
+    {{/each}}
+</div> --}}
