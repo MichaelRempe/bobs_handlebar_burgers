@@ -1,17 +1,42 @@
-{{#each orders}}
-<h1>{{this.name}}</h1>
-{{/each}}
-{{!-- <div class="col-6 text-center">
-    <h2>Order List:</h2>
-    <ul>
-        {{#each orders}}
-        <li>{{this.name}}</li>
-        {{/each}}
-    </ul>
+<div class="text-center">
+    <img src="https://i.pinimg.com/originals/2d/e2/07/2de207f0b5203c786b748541057a5df3.jpg">
 </div>
-<div class="col-6 text-center">
-    <h2>Devoured Burgers:</h2>
-    {{#each devoured}}
-        <li>{{this.name}}</li>
-    {{/each}}
-</div> --}}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6 text-center">
+            <form>
+                <input class="form-control form-control-lg burger" type="text" placeholder="Burger Order Goes Here!">
+                <button type="button" class="orderBTN btn btn-danger btn-lg">Place Order</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 text-center">
+            <h2>Order List:</h2>
+            <ul class="list-group">
+                {{#each orders}}
+                <li class="list-group-item flush">
+                    <div class="row">
+                        <div class="col-9">
+                            <h5 id="order">{{this.name}}</h5>
+                        </div>
+                        <div class="col-3">
+                            <button type="button" name={{this.id}} class="btn btn-success devour">Devour!</button>
+                        </div>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-6 text-center">
+            <h2>Devoured Burgers:</h2>
+            <ul class="list-group">
+                {{#each devoured}}
+                <li class="list-group-item">
+                    <h5 id="order">{{this.name}}</h5>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

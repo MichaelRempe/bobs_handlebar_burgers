@@ -25,7 +25,6 @@ app.use(express.static("./app/public"));
 
 //**********ROUTES************************************************************************************//
 //Links out to route handler
-require("./app/routes/html-routes")(app);
 require("./app/routes/api-routes")(app);
 
 //**********SYNC-DB***********************************************************************************//

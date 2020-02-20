@@ -11,25 +11,9 @@
 </head>
 
 <body>
-    <div class="text-center">
-        <img src="https://i.pinimg.com/originals/2d/e2/07/2de207f0b5203c786b748541057a5df3.jpg">
+    <div class="view">
+        {{{body}}}
     </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-                <form>
-                    <input class="form-control form-control-lg burger" type="text" placeholder="Burger Order Goes Here!">
-                    <button type="button" class="orderBTN btn btn-danger btn-lg">
-                        <a href="index">Place Order</a>
-                    </button>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            {{{body}}}
-        </div>
-    </div>
-
     {{!-- jquery CDN --}}
     <script src="https://code.jquery.com/jquery.js"></script>
     {{!-- bootstrap CDN --}}
@@ -37,21 +21,67 @@
     {{!-- InLine script --}}
     <script>
         $(document).ready(() => {
+            // acquire DOM buttons
             let orderBTN = $(".orderBTN");
 
-            orderBTN.on("click", () => {
-                console.log($('.burger').val().trim())
-                $.ajax({
-                    url:"http://localhost:8080/burgers",
-                    method:'POST',
-                    data:{
-                        name:$('.burger').val()
-                    }
 
-                }).then((res)=>{
-                    console.log("done");
+
+            // POST: passes data to post route to add new burger
+            orderBTN.on("click", (event) => {
+                event.preventDefault();
+                $.ajax({
+                    url: "http://localhost:8080/burgers",
+                    method: 'POST',
+                    data: {
+                        name: $('.burger').val().trim()
+                    }
+                }).then((res) => {
+                    alert("Order placed!");
+                    location.reload();
+                    reloadButtons();
                 })
             })
+            let reloadButtons = () => {
+               $(".devour").on("click", (event)=>{
+                   let id = event.target.name
+                    $.ajax({
+                            url: "http://localhost:8080/burgers/" + id,
+                            method: "PUT"
+                        }).then(alert("burger eaten!"));
+                        location.reload();
+                        reloadButtons();
+                   //console.log($(this).attr("data-id"));
+                   //console.log($(this).data("id"));)
+               })
+            }
+
+            let devour = () => {
+                //pseudo code
+                // select updated <li>'s generated from data base and append button on to each that when clicked updates the DB 
+                /*
+                    let update = $('<button>', 
+                        {
+                            text:"Devour",
+                            click: (event)=>{
+                                 event.preventDefault();
+                                 $.ajax({
+                                     url: "http://localhost:8080/update/:id",
+                                     method: 'POST',
+                                     data: {
+                                         name: $('.burger').val().trim()
+                                        }
+                                    }).then((res) => {
+                                        alert("Order placed!");
+                                        reloadView();
+                                })
+                            }
+                        })
+                    $(.orders).append()
+                    
+                */
+
+            }
+            reloadButtons();
         })
     </script>
     <style>
